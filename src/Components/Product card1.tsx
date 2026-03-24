@@ -21,15 +21,17 @@ function ProductCard({ product, inCart, onAddToCart, onRemoveFromCart }: {
       <img src={product.image} alt={product.name} />
       <h3>{product.name}</h3>
       <p>{product.price} MDL</p>
-      <button onClick={() => setLiked(!liked)}>
-        {liked ? "♥ Избранное" : "♡ В избранное"}
-      </button>
-      <button onClick={() => {
-        if (!inCart) onAddToCart(product.id);
-        else onRemoveFromCart(product.id);
-      }}>
-        {inCart ? "✓ Добавлено" : "В корзину"}
-      </button>
+      <div className="card-buttons">
+        <button onClick={() => setLiked(!liked)}>
+          {liked ? "♥ Избранное" : "♡ В избранное"}
+        </button>
+        <button onClick={() => {
+          if (!inCart) onAddToCart(product.id);
+          else onRemoveFromCart(product.id);
+        }}>
+          {inCart ? "✓ Добавлено" : "В корзину"}
+        </button>
+      </div>
     </div>
   );
 }
