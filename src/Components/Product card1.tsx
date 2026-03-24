@@ -1,19 +1,37 @@
+import { useState } from "react";
+
 interface Product {
   id: number;
   name: string;
   price: number;
+  category: string;
   image: string;
 }
 
-function ProductCard({ product }: { product: Product }) {
+function ProductCard({ product, inCart, onAddToCart, onRemoveFromCart }: {
+  product: Product;
+  inCart: boolean;
+  onAddToCart: (id: number) => void;
+  onRemoveFromCart: (id: number) => void;
+}) {
+  const [liked, setLiked] = useState(false);
+
   return (
     <div className="card">
       <img src={product.image} alt={product.name} />
       <h3>{product.name}</h3>
-      <p>{product.price} €</p>
-      <button>В корзину</button>
+      <p>{product.price} MDL</p>
+      <button onClick={() => setLiked(!liked)}>
+        {liked ? "♥ Избранное" : "♡ В избранное"}
+      </button>
+      <button onClick={() => {
+        if (!inCart) onAddToCart(product.id);
+        else onRemoveFromCart(product.id);
+      }}>
+        {inCart ? "✓ Добавлено" : "В корзину"}
+      </button>
     </div>
   );
 }
-<div className="card" style={{ animation: "fadeIn 0.6s ease" }}></div>
+
 export default ProductCard;
