@@ -15,18 +15,21 @@ function Filters({ setCategory, category }: Props) {
       >
         Все
       </button>
+
       <button
-        onClick={() => setCategory("Букеты")}
-        style={{ background: category === "Букеты" ? activeColor : inactiveColor }}
+        onClick={() => setCategory("Сборные букеты")}
+        style={{ background: category === "Сборные букеты" ? activeColor : inactiveColor }}
       >
-        Букеты
+        Сборные букеты
       </button>
+
       <button
-        onClick={() => setCategory("Подписка")}
-        style={{ background: category === "Подписка" ? activeColor : inactiveColor }}
+        onClick={() => setCategory("Монобукеты")}
+        style={{ background: category === "Монобукеты" ? activeColor : inactiveColor }}
       >
-        Подписка
+        Монобукеты
       </button>
+      
     </div>
   );
 }

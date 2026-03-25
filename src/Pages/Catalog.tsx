@@ -24,11 +24,15 @@ function Catalog() {
     }
   }, [])
 
+  /*тут фильтры и на поиск+категорию и исключение подписок из каталога (тк все вместе в flower.ts) */
   const filtered: Flower[] = products.filter((flower) => {
-    const matchSearch = flower.name.toLowerCase().includes(search.toLowerCase())
-    const matchCategory = category === 'Все' || flower.category === category
-    return matchSearch && matchCategory
-  })
+  const matchSearch = flower.name.toLowerCase().includes(search.toLowerCase())
+  const matchCategory = category === 'Все' || flower.category === category
+  const notSubscription = flower.category !== "Подписка"
+
+  return matchSearch && matchCategory && notSubscription
+})
+
 
   const addToCart = (id: number) => setCartIds([...cartIds, id])
   const removeFromCart = (id: number) => setCartIds(cartIds.filter(i => i !== id))
