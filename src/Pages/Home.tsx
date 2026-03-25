@@ -7,7 +7,7 @@ function Home() {
     <div className="home">
       <div className="home-hero">
         <img
-          src="https://vastphotos.com/files/uploads/photos/11665/photo-of-flowers-with-pink-background-l.jpg?v=20240917122123"
+          src="https://www.pixelstalk.net/wp-content/uploads/images6/Aesthetic-Flower-Backgrounds-HD.jpg"
           alt="Цветы"
           className="home-hero-img"
         />
@@ -21,13 +21,10 @@ function Home() {
           <p>Бесплатная открытка к каждому букету</p>
         </div>
         <div className="home-feature">
-          <p>Быстрая доставка по городу, за 1 час</p>
+          <p>Быстрая доставка по городу</p>
         </div>
         <div className="home-feature">
-          <p>100% свежие цветы или заменим букет</p>
-        </div>
-        <div className="home-feature">
-          <p>Культурные курьеры, сервис до самой двери</p>
+          <p>Искренние эмоции в каждом букете</p>
         </div>
       </div>
     </div>

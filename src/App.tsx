@@ -4,6 +4,7 @@ import Catalog from './Pages/Catalog'
 import Header from './Components/Header'
 import Footer from './Components/Footer'
 import './App.css'
+import Subscriptions from './Pages/Subscriptions'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/catalog" element={<Catalog />} />
+        <Route path="/subscriptions" element={<Subscriptions />} />
       </Routes>
       <Footer />
     </div>
