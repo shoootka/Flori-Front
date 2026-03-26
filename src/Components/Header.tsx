@@ -4,7 +4,7 @@ function Header() {
   return (
     <header className="header">
       <h1 style={{ cursor: "pointer" }}>
-        <Link to="/">FLORIVÉ</Link>
+        <Link to="/home">FLORIVÉ</Link>
       </h1>
 
       <nav>
