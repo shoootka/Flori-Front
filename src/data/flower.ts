@@ -26,7 +26,7 @@ export const flowers: Flower[] = [
     name: "Подписка на месяц",
     price: 5000,
     category: "Подписка",
-    image: "https://cveti32.ru/wp-content/uploads/2021/08/dorogie-cvety-960x640.jpg"
+    image: "https://i.pinimg.com/736x/a2/61/ce/a261cef79589bd5786eb308ba1146826.jpg"
   },
   {
     id: 4,
@@ -75,6 +75,6 @@ export const flowers: Flower[] = [
     name: "Подписка на 3 месяца",
     price: 13500,
     category: "Подписка",
-    image: "https://cveti32.ru/wp-content/uploads/2021/08/dorogie-cvety-960x640.jpg"
+    image: "https://i.pinimg.com/1200x/18/aa/69/18aa69ca024128ba3de6d0acb20ce31c.jpg"
   }
 ];

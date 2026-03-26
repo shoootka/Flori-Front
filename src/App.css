@@ -186,6 +186,7 @@ html, body {
   object-fit: cover;
 }
 
+/*
 .home-hero-btn {
   position: absolute;
   bottom: 40px;
@@ -206,9 +207,60 @@ html, body {
 .home-hero-btn:hover {
   transform: translateX(-50%) scale(1.05);
   box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}*/
+
+.home-hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  background: rgba(255, 129, 161, 0.8);
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.home-hero-dark {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(255, 182, 193, 0.18),
+    rgba(99, 67, 67, 0.371)
+  );
+}
+
+.home-hero-buttons button {
+  padding: 12px 25px;
+  border-radius: 30px;
+  border: none;
+  color: #fb7d9b;
+  background: white;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 16px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.home-hero-buttons button:hover {
+  background: #f96c8f;
+  color: white;
+  transform: scale(1.05);
+}
+
+.home-hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.home-hero-buttons button {
+  min-width: 160px;
 }
 
 /* FEATURES */
+/*
 .home-features {
   display: flex;
   justify-content: center;
@@ -240,6 +292,51 @@ html, body {
   color: #333;
   line-height: 1.6;
   margin: 0;
+}*/
+.home-features {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 40px 60px;
+  flex-wrap: wrap;
+}
+
+.home-feature {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 420px;
+  min-height: 170px;
+  padding: 25px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+  text-align: left;
+  transition: 0.3s;
+}
+
+.home-feature:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.home-feature-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.home-feature h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.home-feature p {
+  font-size: 15px;
+  color: #555;
+  margin: 2px 0;
 }
 
 /* CATALOG PAGE */
@@ -257,24 +354,106 @@ html, body {
 /* SUBSCRIPTIONS PAGE */
 
 .subscriptions-page {
-  padding-top: 60px;
+  padding: 60px 20px;
   text-align: center;
+}
+.subscriptions-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px 20px 70px;
+}
+
+.subscriptions-top {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .subscriptions-title {
-  font-size: 36px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.subscriptions-subtitle {
-  font-size: 18px;
-  color: #666;
+  font-size: 48px;
+  font-weight: 500;
+  color: #444;
   margin-bottom: 20px;
 }
 
-/* чуть выделяет карточки подписки */
-.subscriptions-page .card {
-  border: 2px solid rgba(253, 110, 136, 0.3);
-  position: relative;
+.subscriptions-text {
+  font-size: 18px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.subscriptions-accent {
+  font-size: 20px;
+  color: #f24e77;
+  margin-top: 18px;
+  font-weight: 600;
+}
+
+.subscriptions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.subscription-card {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid rgba(244, 138, 164, 0.25);
+  border-radius: 28px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.subscription-image {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 22px;
+  flex-shrink: 0;
+}
+
+.subscription-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.subscription-content h3 {
+  font-size: 26px;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+.subscription-description {
+  font-size: 17px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.subscription-price {
+  font-size: 28px;
+  font-weight: 700;
+  color: #f48aa4;
+  margin-bottom: 18px;
+}
+
+.subscription-button {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 999px;
+  background: #f48aa4;
+  color: white;
+  font-size: 16px;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.subscription-button:hover {
+  background: #ef6f93;
+  transform: scale(1.04);
 }
