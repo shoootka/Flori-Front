@@ -9,7 +9,7 @@ export type Flower = {
 export const flowers: Flower[] = [
   {
     id: 1,
-    name: "Букет «Элегия»",
+    name: "Букет «Сказка»",
     price: 870,
     category: "Сборные букеты",
     image: "https://i.pinimg.com/736x/80/c8/71/80c871c267ac1fd3864832633fd2476b.jpg"
@@ -51,7 +51,7 @@ export const flowers: Flower[] = [
   },
   {
     id: 7,
-    name: "Букет из гвоздик «Сказка»",
+    name: "Букет из гвоздик «Элегия»",
     price: 790,
     category: "Монобукеты",
     image: "https://i.pinimg.com/736x/55/f9/70/55f9709523bebc62aca24c3266994c13.jpg"
