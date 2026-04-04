@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer className="footer">
-      © 2026 FlowerSub. Все права защищены.
+      © 2026 FLORIVÉ. Все права защищены.
     </footer>
   );
 }

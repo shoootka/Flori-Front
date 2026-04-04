@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
+// import { useNavigate } from 'react-router-dom'
 import type { Flower } from '../data/flower'
 import { flowers } from '../data/flower'
 import SearchBar from '../Components/Search'
 import Filters from '../Components/Filters'
 import ProductList from '../Components/ProductList'
 import Counter from '../Components/Counter'
+import { useCart } from '../data/CartContext'
 
 function Catalog() {
   const [search, setSearch] = useState('')
@@ -12,7 +14,8 @@ function Catalog() {
   const [products, setProducts] = useState<Flower[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [cartIds, setCartIds] = useState<number[]>([])
+  const { cart, setCart } = useCart();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     try {
@@ -34,8 +37,13 @@ function Catalog() {
 })
 
 
-  const addToCart = (id: number) => setCartIds([...cartIds, id])
-  const removeFromCart = (id: number) => setCartIds(cartIds.filter(i => i !== id))
+  const addToCart = (id: number) => {
+    if (cart.some((item: {id: number, qty: number}) => item.id === id)) return;
+    setCart([...cart, { id, qty: 1 }]);
+  }
+  const removeFromCart = (id: number) => {
+    setCart(cart.filter((item: {id: number, qty: number}) => item.id !== id));
+  }
 
   if (loading) return <p className="counter">Загрузка...</p>
   if (error) return <p className="counter">Ошибка: {error}</p>
@@ -48,7 +56,7 @@ function Catalog() {
       <Counter count={filtered.length} />
       <ProductList
         products={filtered}
-        cartIds={cartIds}
+        cartIds={cart.map((item: {id: number, qty: number}) => item.id)}
         onAddToCart={addToCart}
         onRemoveFromCart={removeFromCart}
       />

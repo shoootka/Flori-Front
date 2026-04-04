@@ -6,9 +6,9 @@ function Subscriptions() {
   return (
     <div className="subscriptions-page">
       <div className="subscriptions-top">
-        <h1 className="subscriptions-title">Цветочная подписка</h1>
 
-        <div className="subscriptions-text">
+        <div className="subscriptions-hero">
+          <h1 className="subscriptions-title">Цветочная подписка</h1>
         <p>
           Еженедельная доставка свежих букетов для дома, офиса или в подарок.
         </p>
@@ -23,6 +23,7 @@ function Subscriptions() {
        </div>
       </div>
 
+<div className="section-divider"></div>
       <div className="subscriptions-list">
         {subscriptions.map((item) => (
           <div className="subscription-card" key={item.id}>

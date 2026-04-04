@@ -5,18 +5,23 @@ import Header from './Components/Header'
 import Footer from './Components/Footer'
 import './App.css'
 import Subscriptions from './Pages/Subscriptions'
+import Cart from './Pages/Cart'
+import { CartProvider } from './data/CartContext'
 
 function App() {
   return (
-    <div className="app-wrapper">
-      <Header />
-      <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/catalog" element={<Catalog />} />
-        <Route path="/subscriptions" element={<Subscriptions />} />
-      </Routes>
-      <Footer />
-    </div>
+    <CartProvider>
+      <div className="app-wrapper">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/subscriptions" element={<Subscriptions />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+        <Footer />
+      </div>
+    </CartProvider>
   )
 }
 
