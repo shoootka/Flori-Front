@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import { useCart } from '../data/CartContext';
 
 function Header() {
-  const { cart } = useCart();
+  const { cart, favorites } = useCart();
   const cartCount = cart.reduce((sum: number, item: { qty?: number }) => sum + (item.qty || 1), 0);
+  const favCount = favorites.length;
   return (
     <header className="header">
       <h1 style={{ cursor: "pointer" }}>
@@ -13,7 +14,9 @@ function Header() {
       <nav>
         <Link to="/catalog">Букеты</Link>
         <Link to="/subscriptions">Подписка</Link>
-        <Link to="/favorites">Избранное</Link>
+        <Link to="/favorites" className="cart-link">
+          Избранное{favCount > 0 && <span className="cart-badge">{favCount}</span>}
+        </Link>
         <Link to="/cart" className="cart-link">
           Корзина{cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
         </Link>

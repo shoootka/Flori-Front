@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCart } from "../data/CartContext";
 
 interface Product {
   id: number;
@@ -14,7 +14,16 @@ function ProductCard({ product, inCart, onAddToCart, onRemoveFromCart }: {
   onAddToCart: (id: number) => void;
   onRemoveFromCart: (id: number) => void;
 }) {
-  const [liked, setLiked] = useState(false);
+  const { favorites, setFavorites } = useCart();
+  const isLiked = favorites.includes(product.id);
+
+  const toggleLike = () => {
+    if (isLiked) {
+      setFavorites(favorites.filter(id => id !== product.id));
+    } else {
+      setFavorites([...favorites, product.id]);
+    }
+  };
 
   return (
     <div className="card">
@@ -22,8 +31,8 @@ function ProductCard({ product, inCart, onAddToCart, onRemoveFromCart }: {
       <h3>{product.name}</h3>
       <p>{product.price} MDL</p>
       <div className="card-buttons">
-        <button onClick={() => setLiked(!liked)}>
-          {liked ? "♥ Избранное" : "♡ В избранное"}
+        <button onClick={toggleLike}>
+          {isLiked ? "♥ Избранное" : "♡ В избранное"}
         </button>
         <button onClick={() => {
           if (!inCart) onAddToCart(product.id);

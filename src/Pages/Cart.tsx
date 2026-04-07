@@ -1,9 +1,11 @@
 
 import { flowers } from '../data/flower';
 import { useCart } from '../data/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 function Cart() {
   const { cart, setCart } = useCart();
+  const navigate = useNavigate();
 
   const changeQty = (id: number, delta: number) => {
     setCart(
@@ -47,7 +49,7 @@ function Cart() {
             ))}
           </ul>
           <div className="cart-total">Итого: <b>{total} MDL</b></div>
-          <button className="cart-checkout">Оформить заказ</button>
+          <button className="cart-checkout" onClick={() => navigate('/order')}>Оформить заказ</button>
         </>
       )}
     </div>
