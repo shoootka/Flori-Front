@@ -1,0 +1,81 @@
+.profile-page {
+  max-width: 400px;
+  margin: 100px auto 60px auto;
+  background: #fff5f8;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(253, 110, 136, 0.08);
+  padding: 32px 24px 24px 24px;
+  text-align: center;
+}
+
+.profile-page h2 {
+  color: #f48aa4;
+  margin-bottom: 24px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-form input,
+.auth-form select {
+  padding: 12px;
+  border: 1px solid #f48aa4;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.auth-form button {
+  background: #f48aa4;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.auth-form button:hover {
+  background: #fd5d82;
+}
+
+.switch-btn {
+  background: none;
+  color: #f48aa4;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-left: 8px;
+}
+
+.error {
+  color: #fd5d82;
+  font-weight: 500;
+}
+
+.profile-info {
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.profile-info p {
+  margin: 8px 0;
+}
+
+.logout-btn {
+  background: #fd5d82;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.logout-btn:hover {
+  background: #f48aa4;
+}
