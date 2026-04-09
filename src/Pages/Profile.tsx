@@ -1,3 +1,4 @@
+// Личный кабинет с регистрацией и входом для пользователей и админов
 import { useState } from 'react';
 import { useAuth } from '../data/AuthContext';
 import './Profile.css';
