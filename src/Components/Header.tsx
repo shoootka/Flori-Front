@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { useCart } from '../data/CartContext';
+import { useAuth } from '../data/AuthContext';
 
 function Header() {
   const { cart, favorites } = useCart();
+  const { user } = useAuth();
   const cartCount = cart.reduce((sum: number, item: { qty?: number }) => sum + (item.qty || 1), 0);
   const favCount = favorites.length;
   return (
@@ -20,6 +22,7 @@ function Header() {
         <Link to="/cart" className="cart-link">
           Корзина{cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
         </Link>
+        <Link to="/profile">{user ? user.username : 'Профиль'}</Link>
         <Link to="/about">О нас</Link>
         <Link to="/contacts">Контакты</Link>
       </nav>

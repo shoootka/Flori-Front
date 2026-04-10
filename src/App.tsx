@@ -8,24 +8,29 @@ import Subscriptions from './Pages/Subscriptions'
 import Cart from './Pages/Cart'
 import Fav from './Pages/Fav'
 import Order from './Pages/Order'
+import Profile from './Pages/Profile'
 import { CartProvider } from './data/CartContext'
+import { AuthProvider } from './data/AuthContext'
 
 function App() {
   return (
-    <CartProvider>
-      <div className="app-wrapper">
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/catalog" element={<Catalog />} />
-          <Route path="/subscriptions" element={<Subscriptions />} />
-          <Route path="/favorites" element={<Fav />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/order" element={<Order />} />
-        </Routes>
-        <Footer />
-      </div>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <div className="app-wrapper">
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/catalog" element={<Catalog />} />
+            <Route path="/subscriptions" element={<Subscriptions />} />
+            <Route path="/favorites" element={<Fav />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/order" element={<Order />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+          <Footer />
+        </div>
+      </CartProvider>
+    </AuthProvider>
   )
 }
 
