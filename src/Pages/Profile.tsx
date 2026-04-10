@@ -1,4 +1,3 @@
-// Личный кабинет с регистрацией и входом для пользователей и админов
 import { useState } from 'react';
 import { useAuth } from '../data/AuthContext';
 import './Profile.css';
@@ -26,7 +25,7 @@ function Profile() {
         setError('Неверный email или пароль');
       }
     } else {
-      if (!register(formData.username, formData.email, formData.password, formData.role)) {
+      if (!register(formData.username, formData.email, formData.password, 'user')) {
         setError('Пользователь с таким email уже существует');
       }
     }
@@ -76,12 +75,6 @@ function Profile() {
           onChange={handleChange}
           required
         />
-        {!isLogin && (
-          <select name="role" value={formData.role} onChange={handleChange}>
-            <option value="user">Пользователь</option>
-            <option value="admin">Администратор</option>
-          </select>
-        )}
         {error && <p className="error">{error}</p>}
         <button type="submit">{isLogin ? 'Войти' : 'Зарегистрироваться'}</button>
       </form>
