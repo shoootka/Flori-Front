@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../data/AuthContext';
 import './Profile.css';
-// Страница профиля с формой входа и регистрации
+
 function Profile() {
   const { user, login, register, logout } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
@@ -91,4 +91,3 @@ function Profile() {
 }
 
 export default Profile;
-//fff

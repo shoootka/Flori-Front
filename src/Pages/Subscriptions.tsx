@@ -1,7 +1,9 @@
 import { flowers } from "../data/flower";
+import { useNavigate } from "react-router-dom";
 
 function Subscriptions() {
   const subscriptions = flowers.filter((item) => item.category === "Подписка");
+  const navigate = useNavigate();
 
   return (
     <div className="subscriptions-page">
@@ -10,16 +12,13 @@ function Subscriptions() {
         <div className="subscriptions-hero">
           <h1 className="subscriptions-title">Цветочная подписка</h1>
         <p>
-          Еженедельная доставка свежих букетов для дома, офиса или в подарок.
-        </p>
-
-        <p>
           Создать уют дома или на рабочем столе совсем не сложно — просто выберите любую подписку, а все остальные заботы мы берём на себя.
         </p>
 
         <p className="subscriptions-accent">
-          А ещё подписка — это отличный подарок!
+          Вы выбираете первый букет, а далее: наши флористы создают для вас уникальные композиции, учитывая ваши предпочтения и сезонность цветов.
         </p>
+
        </div>
       </div>
 
@@ -36,7 +35,10 @@ function Subscriptions() {
               </p>
               <p className="subscription-price">{item.price} леев</p>
 
-              <button className="subscription-button">
+              <button
+                className="subscription-button"
+                onClick={() => navigate('/subscription-order', { state: { subscription: item } })}
+              >
                 Оформить подписку
               </button>
             </div>

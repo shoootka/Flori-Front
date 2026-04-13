@@ -11,7 +11,8 @@ function Order() {
     phone: '',
     email: '',
     address: '',
-    comment: ''
+    comment: '',
+    card: ''
   });
   const [orderPlaced, setOrderPlaced] = useState(false);
 
@@ -139,7 +140,20 @@ function Order() {
             name="comment"
             value={formData.comment}
             onChange={handleInputChange}
-            rows={3}
+            rows={1}
+            style={{ resize: 'vertical' }}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="card">Текст для открытки</label>
+          <textarea
+            id="card"
+            name="card"
+            value={formData.card}
+            onChange={handleInputChange}
+            rows={1}
+            style={{ resize: 'vertical' }}
           />
         </div>
 
