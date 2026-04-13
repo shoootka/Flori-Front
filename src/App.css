@@ -310,7 +310,6 @@ html, body {
   margin-top: auto;
 }
 
-/* HOME PAGE */
 .home-hero {
   position: relative;
   width: 100%;
@@ -322,29 +321,6 @@ html, body {
   height: 100%;
   object-fit: cover;
 }
-
-/*
-.home-hero-btn {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 15px 45px;
-  border-radius: 30px;
-  border: none;
-  background: white;
-  color: #ff4d7a;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-.home-hero-btn:hover {
-  transform: translateX(-50%) scale(1.05);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
-}*/
 
 .home-hero-overlay {
   position: absolute;

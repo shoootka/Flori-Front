@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from './Pages/Home'
+import SubscriptionOrder from './Pages/SubscriptionOrder'
 import Catalog from './Pages/Catalog'
 import Header from './Components/Header'
 import Footer from './Components/Footer'
@@ -26,6 +27,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/order" element={<Order />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/subscription-order" element={<SubscriptionOrder />} />
           </Routes>
           <Footer />
         </div>
