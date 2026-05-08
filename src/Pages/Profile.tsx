@@ -12,26 +12,27 @@ function Profile() {
     role: 'user' as 'user' | 'admin',
   });
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setLoading(true);
+
     if (isLogin) {
-      if (!login(formData.email, formData.password)) {
-        setError('Неверный email или пароль');
-      }
+      const ok = await login(formData.email, formData.password);
+      if (!ok) setError('Неверный email или пароль');
     } else {
-      if (!register(formData.username, formData.email, formData.password, 'user')) {
-        setError('Пользователь с таким email уже существует');
-      }
+      const ok = await register(formData.username, formData.email, formData.password, 'user');
+      if (!ok) setError('Пользователь с таким email уже существует');
     }
+
+    setLoading(false);
   };
-
-
 
   if (user) {
     return (
@@ -78,7 +79,9 @@ function Profile() {
           required
         />
         {error && <p className="error">{error}</p>}
-        <button type="submit">{isLogin ? 'Войти' : 'Зарегистрироваться'}</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Подождите...' : (isLogin ? 'Войти' : 'Зарегистрироваться')}
+        </button>
       </form>
       <p>
         {isLogin ? 'Нет аккаунта?' : 'Уже есть аккаунт?'}

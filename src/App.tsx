@@ -10,13 +10,12 @@ import Cart from './Pages/Cart'
 import Fav from './Pages/Fav'
 import Order from './Pages/Order'
 import Profile from './Pages/Profile'
-import { CartProvider } from './data/CartContext'
-import { AuthProvider } from './data/AuthContext'
+import AdminGuard from './Components/AdminGuard'
+import AdminProducts from './Pages/AdminProducts'
+import AdminSubscriptions from './Pages/AdminSubscriptions';
 
 function App() {
   return (
-    <AuthProvider>
-      <CartProvider>
         <div className="app-wrapper">
           <Header />
           <Routes>
@@ -28,11 +27,11 @@ function App() {
             <Route path="/order" element={<Order />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/subscription-order" element={<SubscriptionOrder />} />
+            <Route path="/admin/products" element={<AdminGuard><AdminProducts /></AdminGuard>} />
+            <Route path="/admin/subscriptions" element={<AdminGuard><AdminSubscriptions /></AdminGuard>} />
           </Routes>
           <Footer />
         </div>
-      </CartProvider>
-    </AuthProvider>
   )
 }
 
