@@ -44,7 +44,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return true;
   };
 
-  const register = async (username: string, email: string, password: string, role: 'user' | 'admin') => {
+  const register = async (
+    username: string,
+    email: string, 
+    password: string, 
+    role: 'user' | 'admin'
+  ) => {
     const res = await fetch(`${API}/Auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -54,9 +59,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     if (!res.isSuccess) return false;
 
-    const me = await fetch(`${API}/Auth/me`, { credentials: 'include' }).then(r => r.json());
-    setUser(me?.data ?? null);
-    return true;
+    return await login(email, password);
   };
 
   const logout = async () => {
