@@ -22,9 +22,7 @@ function Header() {
         <Link to="/cart" className="cart-link">
           Корзина{cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
         </Link>
-        <Link to="/profile">{user ? user.username : 'Профиль'}</Link>
-        <Link to="/about">О нас</Link>
-        <Link to="/contacts">Контакты</Link>
+        <Link to={user ? "/profile" : "/login"}> {user ? "Кабинет" : "Войти"} </Link>
       </nav>
     </header>
   );

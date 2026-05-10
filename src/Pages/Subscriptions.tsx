@@ -1,8 +1,25 @@
-import { flowers } from "../data/flower";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API = "https://localhost:7161/api";
+
+type SubscriptionPlan = {
+  id: number;
+  name: string;
+  price: number;
+  description?: string;
+  image: string;
+};
+
 function Subscriptions() {
-  const subscriptions = flowers.filter((item) => item.category === "Подписка");
+  const [subscriptions, setSubscriptions] = useState<SubscriptionPlan[]>([]);
+useEffect(() => {
+  fetch(`${API}/SubscriptionPlan`)
+    .then((r) => r.json())
+    .then((data) => setSubscriptions(data?.data ?? []))
+    .catch(() => setSubscriptions([]));
+}, []);
+
   const navigate = useNavigate();
 
   return (
@@ -26,12 +43,16 @@ function Subscriptions() {
       <div className="subscriptions-list">
         {subscriptions.map((item) => (
           <div className="subscription-card" key={item.id}>
-            <img src={item.image} alt={item.name} className="subscription-image" />
+            <img
+              src={item.image || "https://i.pinimg.com/736x/a2/61/ce/a261cef79589bd5786eb308ba1146826.jpg"}
+              alt={item.name}
+              className="subscription-image"
+            />
 
             <div className="subscription-content">
               <h3>{item.name}</h3>
               <p className="subscription-description">
-                Регулярная доставка свежих сезонных букетов с заботой и вниманием к деталям.
+               {item.description || item.description}
               </p>
               <p className="subscription-price">{item.price} леев</p>
 

@@ -9,13 +9,20 @@ import Subscriptions from './Pages/Subscriptions'
 import Cart from './Pages/Cart'
 import Fav from './Pages/Fav'
 import Order from './Pages/Order'
-import Profile from './Pages/Profile'
+import { CartProvider } from './data/CartContext'
+import { AuthProvider } from './data/AuthContext'
 import AdminGuard from './Components/AdminGuard'
 import AdminProducts from './Pages/AdminProducts'
 import AdminSubscriptions from './Pages/AdminSubscriptions';
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
+import Profile from "./Pages/Profile";
+import AdminPanel from "./Pages/AdminPanel";
 
 function App() {
   return (
+    <AuthProvider>
+      <CartProvider>
         <div className="app-wrapper">
           <Header />
           <Routes>
@@ -26,12 +33,18 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/order" element={<Order />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/subscription-order" element={<SubscriptionOrder />} />
             <Route path="/admin/products" element={<AdminGuard><AdminProducts /></AdminGuard>} />
             <Route path="/admin/subscriptions" element={<AdminGuard><AdminSubscriptions /></AdminGuard>} />
+            <Route path="/admin" element={<AdminPanel />} />
           </Routes>
           <Footer />
         </div>
+      </CartProvider>
+    </AuthProvider>
   )
 }
 

@@ -1,6 +1,6 @@
 .profile-page {
   max-width: 400px;
-  margin: 100px auto 60px auto;
+  margin: auto auto 60px auto;
   background: #fff5f8;
   border-radius: 18px;
   box-shadow: 0 2px 16px rgba(253, 110, 136, 0.08);
@@ -77,5 +77,21 @@
 }
 
 .logout-btn:hover {
+  background: #f48aa4;
+}
+
+.admin-btn {
+  background: #fd5d82;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin: 10px 10px 10px 10px;
+}
+
+.admin-btn:hover {
   background: #f48aa4;
 }
