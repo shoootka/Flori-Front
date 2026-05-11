@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../data/AuthContext";
+import { useAuth } from "../../data/AuthContext";
 import "./AdminPanel.css";
+
 
 const API = "https://localhost:7161/api";
 
-type Product = {
+type ProductDTO = {
   id: number;
   name: string;
   price: number;
@@ -13,7 +14,7 @@ type Product = {
   image: string;
 };
 
-type SubscriptionPlan = {
+type SubscriptionPlanDTO = {
   id: number;
   name: string;
   price: number;
@@ -21,21 +22,17 @@ type SubscriptionPlan = {
   image: string;
 };
 
-type User = {
-  id: number;
-  username: string;
-  email: string;
-  role: string;
-};
-
-function AdminPanel() {
+function AdminCatalog() {
   const { user } = useAuth();
 
-  const [products, setProducts] = useState<Product[]>([]);
-  const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
-  const [users, setUsers] = useState([]);
+  const productFormRef = useRef<HTMLFormElement | null>(null);
+  const planFormRef = useRef<HTMLFormElement | null>(null); 
+
+  const [products, setProducts] = useState<ProductDTO[]>([]);
+  const [plans, setPlans] = useState<SubscriptionPlanDTO[]>([]);
 
   const [productForm, setProductForm] = useState({
+    id: 0,
     name: "",
     price: 0,
     category: "",
@@ -43,6 +40,7 @@ function AdminPanel() {
   });
 
   const [planForm, setPlanForm] = useState({
+    id: 0,
     name: "",
     price: 0,
     description: "",
@@ -52,18 +50,7 @@ function AdminPanel() {
   useEffect(() => {
     loadProducts();
     loadPlans();
-    loadUsers();
   }, []);
-
-  const loadUsers = async () => {
-  const res = await fetch(`${API}/User`, {
-    credentials: "include",
-  });
-
-  const data = await res.json();
-
-  setUsers(data?.data ?? []);
-};
 
   const loadProducts = async () => {
     const res = await fetch(`${API}/Product`);
@@ -79,24 +66,17 @@ function AdminPanel() {
     setPlans(data?.data ?? []);
   };
 
-  const deleteProduct = async (id: number) => {
-    const res = await fetch(`${API}/Product/${id}`, {
-      method: "DELETE",
-      credentials: "include",
-    });
-
-    const data = await res.json();
-
-    if (data.isSuccess) {
-      setProducts(products.filter((p) => p.id !== id));
-    }
-  };
-
-  const createProduct = async (e: React.FormEvent) => {
+  const saveProduct = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const res = await fetch(`${API}/Product`, {
-      method: "POST",
+    const method = productForm.id ? "PUT" : "POST";
+
+    const url = productForm.id
+      ? `${API}/Product/${productForm.id}`
+      : `${API}/Product`;
+
+    const res = await fetch(url, {
+      method,
       headers: {
         "Content-Type": "application/json",
       },
@@ -107,9 +87,10 @@ function AdminPanel() {
     const data = await res.json();
 
     if (data.isSuccess) {
-      loadProducts();
+      await loadProducts();
 
       setProductForm({
+        id: 0,
         name: "",
         price: 0,
         category: "",
@@ -118,11 +99,17 @@ function AdminPanel() {
     }
   };
 
-  const createPlan = async (e: React.FormEvent) => {
+  const savePlan = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const res = await fetch(`${API}/SubscriptionPlan`, {
-      method: "POST",
+    const method = planForm.id ? "PUT" : "POST";
+
+    const url = planForm.id
+      ? `${API}/SubscriptionPlan/${planForm.id}`
+      : `${API}/SubscriptionPlan`;
+
+    const res = await fetch(url, {
+      method,
       headers: {
         "Content-Type": "application/json",
       },
@@ -133,14 +120,28 @@ function AdminPanel() {
     const data = await res.json();
 
     if (data.isSuccess) {
-      loadPlans();
+      await loadPlans();
 
       setPlanForm({
+        id: 0,
         name: "",
         price: 0,
         description: "",
         image: "",
       });
+    }
+  };
+
+  const deleteProduct = async (id: number) => {
+    const res = await fetch(`${API}/Product/${id}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+
+    const data = await res.json();
+
+    if (data.isSuccess) {
+      setProducts(products.filter((p) => p.id !== id));
     }
   };
 
@@ -167,19 +168,15 @@ function AdminPanel() {
 
   return (
     <div className="admin-page">
-      <h1>Админ панель</h1>
+      <h1>Управление каталогом</h1>
 
       {/* PRODUCTS */}
 
       <section className="admin-section">
         <h2>Товары</h2>
 
-        <form
-          className="admin-form"
-          onSubmit={createProduct}
-        >
+        <form ref={productFormRef} className="admin-form" onSubmit={saveProduct}>
           <input
-            type="text"
             placeholder="Название"
             value={productForm.name}
             onChange={(e) =>
@@ -205,7 +202,6 @@ function AdminPanel() {
           />
 
           <input
-            type="text"
             placeholder="Категория"
             value={productForm.category}
             onChange={(e) =>
@@ -218,8 +214,7 @@ function AdminPanel() {
           />
 
           <input
-            type="text"
-            placeholder="Ссылка на изображение"
+            placeholder="Ссылка на картинку"
             value={productForm.image}
             onChange={(e) =>
               setProductForm({
@@ -231,20 +226,14 @@ function AdminPanel() {
           />
 
           <button type="submit">
-            Добавить товар
+            {productForm.id ? "Обновить товар" : "Добавить товар"}
           </button>
         </form>
 
         <div className="admin-grid">
           {products.map((product) => (
-            <div
-              className="admin-card"
-              key={product.id}
-            >
-              <img
-                src={product.image}
-                alt={product.name}
-              />
+            <div className="admin-card" key={product.id}>
+              <img src={product.image} alt={product.name} />
 
               <h3>{product.name}</h3>
 
@@ -252,29 +241,39 @@ function AdminPanel() {
 
               <p>{product.category}</p>
 
-              <button
-                onClick={() =>
-                  deleteProduct(product.id)
-                }
-              >
-                Удалить
-              </button>
+              <div className="admin-buttons">
+                <button
+                  onClick={() => {
+                    setProductForm(product);
+                    productFormRef.current?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "center",
+                    });
+                  }}
+                >
+                  Изменить
+                </button>
+
+                <button
+                  onClick={() =>
+                    deleteProduct(product.id)
+                  }
+                >
+                  Удалить
+                </button>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* PLANS */}
+      {/* SUBSCRIPTIONS */}
 
       <section className="admin-section">
         <h2>Подписки</h2>
 
-        <form
-          className="admin-form"
-          onSubmit={createPlan}
-        >
+        <form ref={planFormRef} className="admin-form" onSubmit={savePlan}>
           <input
-            type="text"
             placeholder="Название"
             value={planForm.name}
             onChange={(e) =>
@@ -300,7 +299,6 @@ function AdminPanel() {
           />
 
           <input
-            type="text"
             placeholder="Описание"
             value={planForm.description}
             onChange={(e) =>
@@ -312,8 +310,7 @@ function AdminPanel() {
           />
 
           <input
-            type="text"
-            placeholder="Ссылка на изображение"
+            placeholder="Ссылка на картинку"
             value={planForm.image}
             onChange={(e) =>
               setPlanForm({
@@ -325,20 +322,16 @@ function AdminPanel() {
           />
 
           <button type="submit">
-            Добавить подписку
+            {planForm.id
+              ? "Обновить подписку"
+              : "Добавить подписку"}
           </button>
         </form>
 
         <div className="admin-grid">
           {plans.map((plan) => (
-            <div
-              className="admin-card"
-              key={plan.id}
-            >
-              <img
-                src={plan.image}
-                alt={plan.name}
-              />
+            <div className="admin-card" key={plan.id}>
+              <img src={plan.image} alt={plan.name} />
 
               <h3>{plan.name}</h3>
 
@@ -346,31 +339,34 @@ function AdminPanel() {
 
               <p>{plan.description}</p>
 
-              <button
-                onClick={() =>
-                  deletePlan(plan.id)
-                }
-              >
-                Удалить
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
+              <div className="admin-buttons">
+                <button
+                  onClick={() => {
+                    setPlanForm({
+                      id: plan.id,
+                      name: plan.name,
+                      price: plan.price,
+                      description: plan.description ?? "",
+                      image: plan.image,
+                    });
 
-      {/* USERS */}
+                    planFormRef.current?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "center",
+                    });
+                  }}
+                >
+                  Изменить
+                </button>
 
-      <section className="admin-section">
-        <h2>Пользователи</h2> 
-        <div className="admin-grid">
-          {users.map((user: User) => (  
-            <div
-              className="admin-card"
-              key={user.id} 
-            >
-              <h3>{user.username}</h3>
-              <p>{user.email}</p> 
-              <p>Роль: {user.role}</p>
+                <button
+                  onClick={() =>
+                    deletePlan(plan.id)
+                  }
+                >
+                  Удалить
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -379,4 +375,4 @@ function AdminPanel() {
   );
 }
 
-export default AdminPanel;
+export default AdminCatalog;
