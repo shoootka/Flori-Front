@@ -12,12 +12,12 @@ import Order from './Pages/Order'
 import { CartProvider } from './data/CartContext'
 import { AuthProvider } from './data/AuthContext'
 import AdminGuard from './Components/AdminGuard'
-import AdminProducts from './Pages/AdminProducts'
-import AdminSubscriptions from './Pages/AdminSubscriptions';
+import AdminProducts from './Pages/AdminPages/AdminCatalog'
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Profile from "./Pages/Profile";
-import AdminPanel from "./Pages/AdminPanel";
+import AdminPanel from "./Pages/AdminPages/AdminPanel";
+import AdminUsers from "./Pages/AdminPages/AdminUsers";
 
 function App() {
   return (
@@ -37,9 +37,9 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/subscription-order" element={<SubscriptionOrder />} />
-            <Route path="/admin/products" element={<AdminGuard><AdminProducts /></AdminGuard>} />
-            <Route path="/admin/subscriptions" element={<AdminGuard><AdminSubscriptions /></AdminGuard>} />
+            <Route path="/admin/catalog" element={<AdminGuard><AdminProducts /></AdminGuard>} />
             <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
           </Routes>
           <Footer />
         </div>
